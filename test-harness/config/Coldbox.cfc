@@ -2,6 +2,39 @@
 
 	// Configure ColdBox Application
 	function configure(){
+		moduleSettings = {
+			"cbsecurity-verify": {
+				"verifyEvent": "Verify.new"
+			},
+			"cbauth" : { "userServiceClass" : "User" },
+			"cbsecurity" : {
+				"authentication" : {
+					"provider" : "AuthenticationService@cbauth",
+					"userService" : "User",
+					"prcUserVariables" : "user"
+				},
+				"firewall" : {
+					"validator" : "AuthValidator@cbsecurity",
+					"invalidAuthenticationEvent" : "sessions.new",
+					"defaultAuthenticationAction" : "redirect",
+					"invalidAuthorizationEvent" : "sessions.new",
+					"defaultAuthorizationAction" : "redirect"
+				}
+			},
+			"cfmigrations" : {
+				"managers" : {
+					"default" : {
+						"manager" : "cfmigrations.models.QBMigrationManager",
+						"migrationsDirectory" : "resources/database/migrations/",
+						"properties" : {
+							"defaultGrammar" : "AutoDiscover@qb",
+							"schema" : getSystemSetting( "DB_SCHEMA" ),
+							"datasource" : getSystemSetting( "DB_DATABASE" )
+						}
+					}
+				}
+			}
+		};
 
 		// coldbox directives
 		coldbox = {

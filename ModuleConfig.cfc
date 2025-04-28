@@ -6,42 +6,40 @@
 component {
 
 	// Module Properties
-	this.title 				= "@MODULE_NAME@";
-	this.author 			= "Ortus Solutions";
-	this.webURL 			= "https://www.ortussolutions.com";
-	this.description 		= "@MODULE_DESCRIPTION@";
-	this.version 			= "@build.version@+@build.number@";
+	this.title       = "cbSecurity Verify";
+	this.author      = "Ortus Solutions";
+	this.webURL      = "https://www.ortussolutions.com";
+	this.description = "A cbSecurity add-on to verify the current logged-in user for certain routes.";
+	this.version     = "@build.version@+@build.number@";
 
 	// Model Namespace
-	this.modelNamespace		= "@MODULE_SLUG@";
+	this.modelNamespace = "cbsecurity-verify";
 
 	// CF Mapping
-	this.cfmapping			= "@MODULE_SLUG@";
+	this.cfmapping = "cbsecurity-verify";
 
 	// Dependencies
-	this.dependencies 		= [];
+	this.dependencies = [ "cbsecurity", "cbstorages" ];
 
 	/**
 	 * Configure Module
 	 */
 	function configure(){
 		settings = {
-
+			"verifyTimeoutSeconds" : 15 * 60, // 15 minutes, in seconds
+			"verifyEvent"          : "",
+			"verifyAction"         : "redirect",
+			"sessionStorage"       : "SessionStorage@cbstorages"
 		};
-	}
 
-	/**
-	 * Fired when the module is registered and activated.
-	 */
-	function onLoad(){
+		binder.map( "SessionStorage@cbsecurity-verify" ).toDSL( settings.sessionStorage );
 
-	}
-
-	/**
-	 * Fired when the module is unregistered and unloaded
-	 */
-	function onUnload(){
-
+		interceptors = [
+			{
+				"class"      : "#moduleMapping#.interceptors.VerifyInterceptor",
+				"properties" : {}
+			}
+		];
 	}
 
 }
