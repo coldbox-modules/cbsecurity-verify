@@ -19,6 +19,29 @@
 
 A cbSecurity add-on to verify the current logged-in user for certain routes.
 
+## Use Case
+
+Use this module when you want to secure a part of your site requiring users to verify their password again
+even if they are already logged in.  Examples may include settings screen, changing passwords or two-factor
+authentication settings, or other sensitive areas of your site.
+
+There are no models to use with this module.  It operates off of Interceptors.
+
+There are four settings available to configure:
+
+```cfc
+settings = {
+	"verifyTimeoutSeconds" : 15 * 60, // 15 minutes, in seconds
+	"verifyEvent"          : "", // required setting
+	"verifyAction"         : "redirect",
+	"sessionStorage"       : "SessionStorage@cbstorages"
+};
+```
+
+The `verifyEvent` should point to an event that shows a form for the user to enter their password again.
+The form can `POST` anywhere you'd like, but it needs to log in the user again since this module sets
+the verify timestamp based on the `postLogin` event from `cbauth`.
+
 ## Welcome to ColdBox
 
 ColdBox *Hierarchical* MVC is the de-facto enterprise-level [HMVC](https://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) framework for ColdFusion (CFML) developers. It's professionally backed, conventions-based, modular, highly extensible, and productive. Getting started with ColdBox is quick and painless.  ColdBox takes the pain out of development by giving you a standardized methodology for modern ColdFusion (CFML) development with features such as:

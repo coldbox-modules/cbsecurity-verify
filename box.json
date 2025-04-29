@@ -10,7 +10,7 @@
         "url":"https://github.com/coldbox-modules/cbsecurity-verify"
     },
     "bugs":"https://github.com/coldbox-modules/cbsecurity-verify",
-    "shortDescription":"Description goes here",
+    "shortDescription":"A cbSecurity add-on to verify the current logged-in user for certain routes.",
     "slug":"cbsecurity-verify",
     "type":"modules",
     "keywords":"",
