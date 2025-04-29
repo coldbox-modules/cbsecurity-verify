@@ -94,9 +94,6 @@ component accessors="true" extends="coldbox.system.Interceptor" {
 			return true;
 		}
 
-		writeDump( var = securedAnnotation );
-		writeDump( var = listFindNoCase( securedAnnotation, "verify" ) );
-
 		var verifyAnnotations = listToArray( securedAnnotation, "," ).filter( ( permission ) => {
 			return findNoCase( "verify", permission ) > 0;
 		} );
