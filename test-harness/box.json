@@ -8,20 +8,16 @@
         "coldbox":"^7.0.0",
         "cbsecurity":"^3.4.3+5",
         "BCrypt":"^3.2.0+1",
-        "quick":"^11.2.1",
         "cbvalidation":"^4.5.0+27"
     },
     "devDependencies":{
-        "testbox":"*",
-        "cfmigrations":"^4.1.3"
+        "testbox":"*"
     },
     "installPaths":{
         "coldbox":"coldbox/",
         "testbox":"testbox/",
         "cbsecurity":"modules/cbsecurity/",
         "BCrypt":"modules/BCrypt/",
-        "quick":"modules/quick/",
-        "cfmigrations":"modules/cfmigrations/",
         "cbvalidation":"modules/cbvalidation/"
     },
     "testbox":{

@@ -1,6 +1,4 @@
-component extends="quick.models.BaseEntity" accessors="true" {
-
-	property name="bcrypt" inject="@BCrypt" persistent="false";
+component accessors="true" {
 
 	property name="id";
 	property name="email";
@@ -8,28 +6,34 @@ component extends="quick.models.BaseEntity" accessors="true" {
 
 	this.memento = { "defaultExcludes" : [ "id" ], "neverInclude" : [ "password" ] };
 
-	public User function setPassword( required string password ){
-		return assignAttribute( "password", bcrypt.hashPassword( arguments.password ) );
-	}
-
 	public boolean function hasPermission( required string permission ){
 		return true;
 	}
 
 	public boolean function isValidCredentials( required string email, required string password ){
-		var user = newEntity().where( "email", arguments.email ).first();
-		if ( isNull( user ) ) {
-			return false;
-		}
-		return bcrypt.checkPassword( arguments.password, user.getPassword() );
+		return arguments.email == "john@example.com" && arguments.password == "password";
 	}
 
 	public User function retrieveUserByUsername( required string email ){
-		return newEntity().where( "email", arguments.email ).firstOrFail();
+		if ( arguments.email != "john@example.com" ) {
+			throw( type = "EntityNotFound", message = "User not found" );
+		}
+
+		setId( 1 );
+		setEmail( "john@example.com" );
+		setPassword( "password" );
+		return this;
 	}
 
 	public User function retrieveUserById( required numeric id ){
-		return newEntity().findOrFail( arguments.id );
+		if ( arguments.id != 1 ) {
+			throw( type = "EntityNotFound", message = "User not found" );
+		}
+
+		setId( 1 );
+		setEmail( "john@example.com" );
+		setPassword( "password" );
+		return this;
 	}
 
 }

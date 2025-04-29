@@ -36,8 +36,6 @@ component {
 	this.mappings[ "/moduleroot" ]            = moduleRootPath;
 	this.mappings[ "/#request.MODULE_NAME#" ] = moduleRootPath & "#request.MODULE_PATH#";
 
-	this.datasource = "cbsecurity_verify_db";
-
 	function onRequestStart( required targetPage ){
 		// Set a high timeout for long running tests
 		setting requestTimeout   ="9999";

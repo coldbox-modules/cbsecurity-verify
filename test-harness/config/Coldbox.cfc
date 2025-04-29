@@ -20,19 +20,6 @@
 					"invalidAuthorizationEvent" : "sessions.new",
 					"defaultAuthorizationAction" : "redirect"
 				}
-			},
-			"cfmigrations" : {
-				"managers" : {
-					"default" : {
-						"manager" : "cfmigrations.models.QBMigrationManager",
-						"migrationsDirectory" : "resources/database/migrations/",
-						"properties" : {
-							"defaultGrammar" : "AutoDiscover@qb",
-							"schema" : getSystemSetting( "DB_SCHEMA" ),
-							"datasource" : getSystemSetting( "DB_DATABASE" )
-						}
-					}
-				}
 			}
 		};
 

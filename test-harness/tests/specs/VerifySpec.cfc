@@ -16,7 +16,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			afterEach( () => variables.cbsecure.getAuthService().quietLogout() );
 
 			it( "redirects the user to verify their password if the user has not verified lately", () => {
-				var john = getInstance( "User" ).findOrFail( 1 );
+				var john = getInstance( "User" ).retrieveUserById( 1 );
 				variables.cbsecure.getAuthService().login( john );
 				var twentyMinutesAgo = getCurrentUnixTimestamp( -1 * 20 * 60 );
 				variables.sessionStorage.set( variables.LAST_VERIFY_TIMESTAMP_KEY, twentyMinutesAgo );
@@ -28,7 +28,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			} );
 
 			it( "does not redirect the user to verify their password if the user has verified lately", () => {
-				var john = getInstance( "User" ).findOrFail( 1 );
+				var john = getInstance( "User" ).retrieveUserById( 1 );
 				variables.cbsecure.getAuthService().login( john );
 				var tenMinutesAgo = getCurrentUnixTimestamp( -1 * 10 * 60 );
 				variables.sessionStorage.set( variables.LAST_VERIFY_TIMESTAMP_KEY, tenMinutesAgo );
@@ -48,7 +48,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			} );
 
 			it( "can set a custom timeout in minutes in the annotation", () => {
-				var john = getInstance( "User" ).findOrFail( 1 );
+				var john = getInstance( "User" ).retrieveUserById( 1 );
 				variables.cbsecure.getAuthService().login( john );
 				var tenMinutesAgo = getCurrentUnixTimestamp( -1 * 10 * 60 );
 				variables.sessionStorage.set( variables.LAST_VERIFY_TIMESTAMP_KEY, tenMinutesAgo );
@@ -60,7 +60,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			} );
 
 			it( "can verify an entire handler", () => {
-				var john = getInstance( "User" ).findOrFail( 1 );
+				var john = getInstance( "User" ).retrieveUserById( 1 );
 				variables.cbsecure.getAuthService().login( john );
 				var twentyMinutesAgo = getCurrentUnixTimestamp( -1 * 20 * 60 );
 				variables.sessionStorage.set( variables.LAST_VERIFY_TIMESTAMP_KEY, twentyMinutesAgo );
@@ -72,7 +72,7 @@ component extends="coldbox.system.testing.BaseTestCase" appMapping="root" {
 			} );
 
 			it( "checks the action for annotations even if the handler has an annotation", () => {
-				var john = getInstance( "User" ).findOrFail( 1 );
+				var john = getInstance( "User" ).retrieveUserById( 1 );
 				variables.cbsecure.getAuthService().login( john );
 				var tenMinutesAgo = getCurrentUnixTimestamp( -1 * 10 * 60 );
 				variables.sessionStorage.set( variables.LAST_VERIFY_TIMESTAMP_KEY, tenMinutesAgo );
